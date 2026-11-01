@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Arcipex Games | Play at the apex</title>
+<meta name="description" content="Arcipex Games is an indie studio making fast, beautiful mobile games. Play Summit Run now.">
+<meta property="og:title" content="Arcipex Games">
+<meta property="og:description" content="Fast, beautiful games for players who always want one more run.">
+<meta name="theme-color" content="#0E0C1A">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;600;800&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0E0C1A; --bg2:#171430; --card:#1B1838; --ink:#F6F4FF; --muted:#A9A4CC; --line:#2F2A58;
+  --gold:#F2B632; --purple:#8479DB; --glow:rgba(132,121,219,.35); --on-gold:#17131F;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px); color-scheme:dark;
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){--bg:#FBFAFF; --bg2:#EFECFC; --card:#FFFFFF; --ink:#17131F; --muted:#5E5A78; --line:#D9D4F2; --glow:rgba(132,121,219,.25); color-scheme:light;}
+}
+:root[data-theme="light"]{--bg:#FBFAFF; --bg2:#EFECFC; --card:#FFFFFF; --ink:#17131F; --muted:#5E5A78; --line:#D9D4F2; --glow:rgba(132,121,219,.25); color-scheme:light;}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Figtree,system-ui,sans-serif;font-size:1.05rem;line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:Sora,system-ui,sans-serif;margin:0;line-height:1.05}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* header */
+header{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .3s,box-shadow .3s}
+header.solid{background:color-mix(in srgb,var(--bg) 82%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+.menu{display:none;background:none;border:0;color:var(--ink);font-size:1.7rem;cursor:pointer;padding:6px 10px}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:Sora,sans-serif;font-weight:600;letter-spacing:.3em;font-size:.95rem}
+.brand svg{width:30px;height:30px}
+nav{display:flex;gap:26px;align-items:center}
+nav a{text-decoration:none;color:var(--muted);font-weight:600;font-size:.95rem}
+nav a:hover{color:var(--ink)}
+nav .cta{background:var(--gold);color:var(--on-gold);padding:9px 20px;border-radius:999px}
+nav .cta:hover{color:var(--on-gold);filter:brightness(1.08)}
+
+/* hero */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:grid;align-items:center;padding:110px 0 70px;overflow:hidden;
+  background:radial-gradient(ellipse 60% 55% at 72% 45%,var(--glow),transparent 70%),radial-gradient(ellipse 40% 40% at 10% 90%,rgba(242,182,50,.12),transparent 70%)}
+#stars{position:absolute;inset:0;width:100%;height:100%}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+.badge{display:inline-flex;gap:10px;align-items:center;padding:8px 16px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.9rem;margin-bottom:26px;background:color-mix(in srgb,var(--bg) 60%,transparent)}
+.badge i{width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 var(--gold);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+h1{font-size:clamp(2.8rem,7.5vw,5.8rem);font-weight:800;letter-spacing:-.035em}
+h1 .gold{color:var(--gold)}
+.hero p.sub{color:var(--muted);font-size:1.2rem;max-width:44ch;margin:26px 0 36px}
+.btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;border-radius:999px;font-weight:600;text-decoration:none;border:2px solid var(--purple);transition:transform .2s,background .2s}
+.btn:hover{transform:translateY(-3px)}
+.btn.main{background:var(--gold);border-color:var(--gold);color:var(--on-gold);box-shadow:0 10px 30px rgba(242,182,50,.3)}
+.btn.alt:hover{background:var(--glow)}
+.stage{perspective:1100px;justify-self:center;width:100%;max-width:460px;position:relative;animation:float 6s ease-in-out infinite}
+.stage::before{content:"";position:absolute;inset:8%;border-radius:50%;background:radial-gradient(circle,var(--glow),transparent 68%);filter:blur(20px)}
+.shadow{position:absolute;left:22%;right:22%;bottom:-4%;height:7%;background:radial-gradient(ellipse,rgba(0,0,0,.6),transparent 70%);filter:blur(8px)}
+@keyframes float{50%{translate:0 -16px}}
+.logo3d{position:relative;width:100%;aspect-ratio:1;transform-style:preserve-3d;transition:transform .2s ease-out}
+.ly{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ly.a{animation:pop 1s .1s both}
+@keyframes pop{from{opacity:0}}
+.arc{stroke-linecap:round;fill:none;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.8s .3s cubic-bezier(.6,0,.2,1) forwards}
+.peak{fill:var(--gold);animation:rise 1.2s .1s cubic-bezier(.2,.8,.2,1) both}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes rise{from{opacity:0;transform:translateY(40px)}}
+.scroll{position:absolute;bottom:22px;left:50%;translate:-50% 0;color:var(--muted);font-size:.85rem}
+
+/* marquee */
+.marquee{background:var(--gold);color:var(--on-gold);overflow:hidden;white-space:nowrap;transform:rotate(-1.2deg);margin:-14px -20px 0;position:relative;z-index:2}
+.marquee div{display:inline-block;padding:16px 0;font-family:Sora,sans-serif;font-weight:800;font-size:1.3rem;animation:slide 28s linear infinite}
+.marquee span{margin:0 26px}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:110px 0}
+h2{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.025em;margin-bottom:16px}
+.lead{color:var(--muted);max-width:56ch;margin:0 0 50px;font-size:1.12rem}
+
+/* games */
+.games{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.gcard{background:var(--card);border:1px solid var(--line);border-radius:26px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.gcard:hover{transform:translateY(-10px) rotate(-.6deg);border-color:var(--purple);box-shadow:0 24px 60px var(--glow)}
+.art{height:210px;position:relative;overflow:hidden}
+.art.a1{background:linear-gradient(160deg,#F2B632,#E2742B)}
+.art.a1::before,.art.a1::after{content:"";position:absolute;bottom:0;background:#17131F;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.art.a1::before{left:6%;width:55%;height:78%;opacity:.88}
+.art.a1::after{right:2%;width:48%;height:55%;opacity:.6}
+.art.a2{background:radial-gradient(circle at 50% 50%,#2A2460,#120F2A)}
+.art.a2::before{content:"";position:absolute;inset:26px calc(50% - 90px);border:10px solid var(--purple);border-radius:50%;box-shadow:0 0 0 18px rgba(132,121,219,.25),0 0 0 40px rgba(132,121,219,.1);animation:spin 9s linear infinite;border-top-color:transparent}
+.art.a2::after{content:"";position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px;background:var(--gold);border-radius:50%;box-shadow:0 0 30px var(--gold)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.art.a3{background:linear-gradient(180deg,#3B2F8F,#8479DB 70%,#F2B632)}
+.art.a3::before{content:"";position:absolute;left:12%;right:12%;bottom:0;height:60%;background:linear-gradient(90deg,#17131F 18%,transparent 18% 41%,#17131F 41% 59%,transparent 59% 82%,#17131F 82%);clip-path:polygon(0 30%,18% 30%,18% 0,41% 0,41% 30%,59% 30%,59% 0,82% 0,82% 30%,100% 30%,100% 100%,0 100%)}
+.gbody{padding:24px 26px 28px}
+.gbody h3{font-size:1.5rem;margin-bottom:8px}
+.gbody p{margin:0 0 18px;color:var(--muted);font-size:1rem}
+.tag{display:inline-block;padding:6px 14px;border-radius:999px;font-size:.88rem;font-weight:600;background:var(--bg2)}
+.tag.live{background:var(--gold);color:var(--on-gold)}
+
+/* about */
+.about{background:var(--bg2)}
+.about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.feat{display:grid;gap:16px}
+.feat div{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--gold);padding:22px 26px;border-radius:18px}
+.feat strong{font-family:Sora,sans-serif;font-size:1.2rem;display:block;margin-bottom:4px}
+.feat span{color:var(--muted)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center}
+.stats b{display:block;font-family:Sora,sans-serif;font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;color:var(--gold)}
+.stats span{color:var(--muted)}
+
+/* roadmap */
+.road{position:relative;display:grid;gap:34px;padding-left:34px;border-left:3px solid var(--line);max-width:700px}
+.road div{position:relative}
+.road div::before{content:"";position:absolute;left:-44px;top:7px;width:17px;height:17px;border-radius:50%;background:var(--purple);border:3px solid var(--bg)}
+.road div.now::before{background:var(--gold);box-shadow:0 0 0 6px rgba(242,182,50,.25)}
+.road h3{font-size:1.25rem}
+.road p{margin:4px 0 0;color:var(--muted)}
+
+/* contact */
+.join{text-align:center;border-radius:36px;padding:80px 28px;background:linear-gradient(135deg,#3B2F8F,#8479DB);color:#fff;position:relative;overflow:hidden}
+.join::after{content:"";position:absolute;right:-80px;top:-120px;width:340px;height:340px;border:30px solid rgba(242,182,50,.35);border-radius:50%}
+.join h2{position:relative}
+.join p{position:relative;max-width:46ch;margin:0 auto 32px;color:#E9E6FF;font-size:1.15rem}
+.join .btn{position:relative}
+.spot{display:grid;grid-template-columns:.8fr 1.2fr;gap:70px;align-items:center}
+.phone{width:240px;aspect-ratio:9/18.5;margin:0 auto;border-radius:38px;border:9px solid #05040b;background:linear-gradient(170deg,#3B2F8F,#8479DB 55%,#F2B632);position:relative;overflow:hidden;box-shadow:0 30px 70px var(--glow),0 0 0 2px var(--line);transform:rotate(-4deg)}
+.phone::before{content:"";position:absolute;left:50%;top:8px;width:70px;height:18px;margin-left:-35px;border-radius:12px;background:#05040b;z-index:3}
+.phone .m1,.phone .m2{position:absolute;bottom:0;background:#17131F;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.phone .m1{left:-20%;width:90%;height:62%}
+.phone .m2{right:-25%;width:85%;height:46%;opacity:.7}
+.phone .hud{position:absolute;top:44px;left:16px;right:16px;display:flex;justify-content:space-between;font-family:Sora,sans-serif;font-weight:600;font-size:.8rem;color:#fff}
+.phone svg{position:absolute;left:50%;bottom:26%;width:70px;height:70px;margin-left:-35px;animation:bob 1.2s ease-in-out infinite}
+@keyframes bob{50%{translate:0 -14px}}
+.ticks{list-style:none;padding:0;margin:0 0 30px;display:grid;gap:12px}
+.ticks li{padding-left:36px;position:relative}
+.ticks li::before{content:"✓";position:absolute;left:0;top:1px;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--on-gold);font-weight:800;font-size:.85rem;display:grid;place-items:center;line-height:1}
+.store{display:inline-block;padding:12px 22px;border-radius:14px;background:#05040b;color:#fff;border:1px solid var(--line);text-decoration:none;font-weight:600;margin:0 10px 10px 0}
+.store:hover{border-color:var(--gold)}
+.faq{max-width:780px}
+details{border-bottom:1px solid var(--line);padding:20px 0}
+summary{cursor:pointer;font-family:Sora,sans-serif;font-weight:600;font-size:1.15rem;list-style:none;display:flex;justify-content:space-between;gap:20px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--gold);font-size:1.5rem;line-height:1}
+details[open] summary::after{content:"−"}
+details p{color:var(--muted);margin:12px 0 0;max-width:62ch}
+.form{position:relative;display:grid;gap:12px;max-width:520px;margin:0 auto 22px}
+.form input,.form textarea{width:100%;padding:14px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.14);color:#fff;font:inherit}
+.form ::placeholder{color:#DCD8FF}
+.soc{position:relative;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.soc a{padding:8px 18px;border:1px solid rgba(255,255,255,.4);border-radius:999px;text-decoration:none;font-weight:600;font-size:.95rem}
+.soc a:hover{background:rgba(255,255,255,.18)}
+footer{border-top:1px solid var(--line);padding:60px 0 calc(30px + env(safe-area-inset-bottom,0px));color:var(--muted);font-size:.95rem}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px;margin-bottom:40px}
+footer h4{font-family:Sora,sans-serif;color:var(--ink);margin:0 0 14px;font-size:1rem}
+footer a{display:block;text-decoration:none;padding:4px 0}
+footer a:hover{color:var(--gold)}
+.copy{border-top:1px solid var(--line);padding-top:24px;text-align:center}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--gold);z-index:60}
+
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.arc{stroke-dashoffset:0}.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+@media (max-width:860px){
+  .hero .wrap,.about .wrap{grid-template-columns:1fr}
+  .stage{order:-1;max-width:270px}
+  .games{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(2,1fr);gap:34px 20px}
+  .menu{display:block}
+  nav{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;background:var(--bg2);padding:10px 24px 20px;display:none;border-bottom:1px solid var(--line)}
+  nav.open{display:flex}
+  nav a{padding:12px 0}
+  nav .cta{text-align:center;margin-top:10px}
+  section{padding:80px 0}
+  .spot,.fgrid{grid-template-columns:1fr;gap:40px}
+  .scroll{display:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="a" viewBox="0 0 400 400"><path class="peak" fill-rule="evenodd" d="M200 40 L305 330 L245 330 L232 285 L168 285 L155 330 L95 330 Z M200 125 L216 240 L184 240 Z"/></symbol>
+</svg>
+
+<div id="bar"></div>
+<header><div class="wrap">
+  <a class="brand" href="#top" aria-label="Arcipex Games home"><svg><use href="#a"/></svg>ARCIPEX</a>
+  <button class="menu" id="menu" aria-label="Menu" aria-expanded="false">☰</button>
+  <nav aria-label="Main" id="nav"><a href="#games">Games</a><a href="#spotlight">Summit Run</a><a href="#about">About</a><a href="#faq">FAQ</a><a class="cta" href="#contact">Contact</a></nav>
+</div></header>
+
+<main id="top">
+<div class="hero">
+  <canvas id="stars" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <div class="badge"><i></i>New game dropping soon</div>
+      <h1>Play at the <span class="gold">apex.</span></h1>
+      <p class="sub">Arcipex Games makes fast, beautiful games for players who always want one more run. Ready to climb?</p>
+      <div class="btns">
+        <a class="btn main" href="#games">Play our games</a>
+        <a class="btn alt" href="#about">Meet the studio</a>
+      </div>
+    </div>
+    <div class="stage"><div class="shadow"></div><div class="logo3d" id="logo" role="img" aria-label="Arcipex Games logo"></div></div>
+  </div>
+  <div class="scroll">Scroll to explore</div>
+</div>
+
+<div class="marquee" aria-hidden="true"><div>
+  <span>PLAY</span><span>★</span><span>CLIMB</span><span>★</span><span>COMPETE</span><span>★</span><span>REACH THE APEX</span><span>★</span><span>PLAY</span><span>★</span><span>CLIMB</span><span>★</span><span>COMPETE</span><span>★</span><span>REACH THE APEX</span><span>★</span>
+  <span>PLAY</span><span>★</span><span>CLIMB</span><span>★</span><span>COMPETE</span><span>★</span><span>REACH THE APEX</span><span>★</span><span>PLAY</span><span>★</span><span>CLIMB</span><span>★</span><span>COMPETE</span><span>★</span><span>REACH THE APEX</span><span>★</span>
+</div></div>
+
+<section id="games"><div class="wrap">
+  <h2 class="rv">Pick your next obsession</h2>
+  <p class="lead rv">Three games, three different ways to chase a high score.</p>
+  <div class="games">
+    <article class="gcard rv"><div class="art a1"></div><div class="gbody"><h3>Summit Run</h3><p>Dodge, jump and sprint up an endless mountain. Beat your friends to the top.</p><span class="tag live">Available now</span></div></article>
+    <article class="gcard rv"><div class="art a2"></div><div class="gbody"><h3>Arc Circuit</h3><p>Connect the glowing rings before time runs out. Easy to learn, hard to master.</p><span class="tag">Coming soon</span></div></article>
+    <article class="gcard rv"><div class="art a3"></div><div class="gbody"><h3>Peak Siege</h3><p>Build your towers, defend your peak and take over the whole mountain.</p><span class="tag">In development</span></div></article>
+  </div>
+</div></section>
+
+<section id="spotlight"><div class="wrap spot">
+  <div class="rv"><div class="phone"><div class="hud"><span>Score 12,480</span><span>Best 18,900</span></div><div class="m1"></div><div class="m2"></div><svg viewBox="0 0 400 400" aria-hidden="true"><use href="#a"/></svg></div></div>
+  <div class="rv">
+    <h2>Meet Summit Run</h2>
+    <p class="lead" style="margin-bottom:24px">Our first game is out now. One thumb, an endless mountain, and a leaderboard that never sleeps.</p>
+    <ul class="ticks"><li>Simple one-tap controls</li><li>A new mountain every day</li><li>Race friends on live leaderboards</li><li>Runs smoothly on everyday phones</li></ul>
+    <a class="store" href="#">Get it on Google Play</a><a class="store" href="#">Download on the App Store</a>
+  </div>
+</div></section>
+
+<section class="about" id="about"><div class="wrap">
+  <div class="rv">
+    <h2>Made by players, for players</h2>
+    <p class="lead" style="margin-bottom:18px">We are a small team that loves games. Every idea has one test: is it fun in the first ten seconds? If not, we start again.</p>
+    <p class="lead" style="margin:0">Our name comes from “apex”, the highest point. It is the bar we set for every game we ship.</p>
+  </div>
+  <div class="feat rv">
+    <div><strong>Fast to start</strong><span>No long tutorials. You are playing in seconds.</span></div>
+    <div><strong>Smooth on any phone</strong><span>Optimised to run well on everyday devices.</span></div>
+    <div><strong>You shape the game</strong><span>Your feedback decides what we build next.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="stats rv">
+    <div><b data-n="3">0</b><span>Games in the works</span></div>
+    <div><b data-n="10" data-s="K+">0</b><span>Players worldwide</span></div>
+    <div><b data-n="25">0</b><span>Levels built</span></div>
+    <div><b data-n="100" data-s="%">0</b><span>Passion</span></div>
+  </div>
+</div></section>
+
+<section id="roadmap" style="padding-top:20px"><div class="wrap">
+  <h2 class="rv">The climb so far</h2>
+  <p class="lead rv">Where we started and where we are heading.</p>
+  <div class="road rv">
+    <div><h3>Studio founded</h3><p>Arcipex Games begins with one simple idea: make games we want to play.</p></div>
+    <div class="now"><h3>Summit Run is live</h3><p>Our first game is out and players are racing up the mountain.</p></div>
+    <div><h3>Arc Circuit launch</h3><p>Our puzzle game arrives with daily challenges and leaderboards.</p></div>
+    <div><h3>Peak Siege</h3><p>Our biggest game yet, built for multiplayer battles.</p></div>
+  </div>
+</div></section>
+
+<section id="faq" style="padding-bottom:40px"><div class="wrap faq">
+  <h2 class="rv">Questions, answered</h2>
+  <div class="rv" style="margin-top:30px">
+    <details><summary>Are Arcipex games free to play?</summary><p>Our games are free to download. Any optional extras are always clearly shown before you buy.</p></details>
+    <details><summary>Which devices do you support?</summary><p>Our games are made for Android and iPhone, and are tuned to run smoothly on everyday phones.</p></details>
+    <details><summary>How can I report a bug or share an idea?</summary><p>Use the contact form below. Every message is read by our team and shapes what we build next.</p></details>
+    <details><summary>Are you hiring or open to partnerships?</summary><p>Yes. Artists, developers and publishers are welcome to get in touch through the contact form.</p></details>
+  </div>
+</div></section>
+
+<section id="contact" style="padding-top:20px"><div class="wrap">
+  <div class="join rv">
+    <h2>Join the climb</h2>
+    <p>Want to play early, publish with us or join the team? Send us a message and we will reply soon.</p>
+    <div class="form"><input id="fn" placeholder="Your name" aria-label="Your name"><input id="fm" type="email" placeholder="Your email" aria-label="Your email"><textarea id="ft" rows="3" placeholder="Your message" aria-label="Your message"></textarea></div>
+    <a class="btn main" id="send" href="mailto:hello@arcipex.com">Send message</a>
+    <div class="soc"><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Discord</a><a href="#">X</a></div>
+  </div>
+</div></section>
+</main>
+<footer><div class="wrap">
+  <div class="fgrid">
+    <div><a class="brand" href="#top" style="padding:0;margin-bottom:14px;color:var(--ink)"><svg><use href="#a"/></svg>ARCIPEX</a><p style="margin:0;max-width:34ch">An indie game studio making fast, beautiful games for players who always want one more run.</p></div>
+    <div><h4>Explore</h4><a href="#games">Games</a><a href="#about">About</a><a href="#roadmap">Roadmap</a><a href="#faq">FAQ</a></div>
+    <div><h4>Company</h4><a href="#contact">Contact</a><a href="#">Privacy Policy</a><a href="#">Terms of Use</a></div>
+  </div>
+  <div class="copy">© 2026 Arcipex Games. All rights reserved.</div>
+</div></footer>
+
+<script>
+(function(){
+  var calm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  // starfield
+  var c=document.getElementById('stars'),x=c.getContext('2d'),W,H,P=[];
+  function size(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;P=[];for(var i=0;i<Math.min(90,W/12);i++)P.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.8+.4,v:Math.random()*.35+.08,g:Math.random()<.2})}
+  function draw(){x.clearRect(0,0,W,H);P.forEach(function(p){x.fillStyle=p.g?'rgba(242,182,50,.8)':'rgba(169,164,204,.6)';x.beginPath();x.arc(p.x,p.y,p.r,0,6.3);x.fill();if(!calm){p.y-=p.v;if(p.y<-5){p.y=H+5;p.x=Math.random()*W}}});if(!calm)requestAnimationFrame(draw)}
+  size();draw();addEventListener('resize',size);
+  // logo tilt
+  var L=document.getElementById('logo');
+  var NS='http://www.w3.org/2000/svg',AD='M200 40 L305 330 L245 330 L232 285 L168 285 L155 330 L95 330 Z M200 125 L216 240 L184 240 Z',RD='M134.3 86.4 A140 140 0 1 0 265.7 86.4';
+  function lp(a,b,t){return Math.round(a+(b-a)*t)}
+  function mk(h,z,c){var s=document.createElementNS(NS,'svg');s.setAttribute('viewBox','0 0 400 400');s.setAttribute('class','ly '+(c||''));s.style.transform='translateZ('+z+'px)';s.innerHTML=h;L.appendChild(s)}
+  var i,t;
+  for(i=0;i<8;i++){t=i/7;mk('<path class="arc" pathLength="1" d="'+RD+'" stroke="rgb('+lp(46,92,t)+','+lp(38,80,t)+','+lp(120,190,t)+')" stroke-width="12"/>',-44+i*2.5)}
+  mk('<defs><linearGradient id="gR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C3BBFF"/><stop offset="1" stop-color="#6F63D0"/></linearGradient><linearGradient id="gA" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFE69A"/><stop offset=".45" stop-color="#F2B632"/><stop offset="1" stop-color="#C98A10"/></linearGradient></defs><path class="arc" pathLength="1" d="'+RD+'" stroke="url(#gR)" stroke-width="12"/><path class="arc" pathLength="1" d="'+RD+'" stroke="rgba(255,255,255,.5)" stroke-width="3" transform="translate(-2.5 -2.5)"/>',-24);
+  for(i=0;i<18;i++){t=i/17;mk('<path fill="rgb('+lp(92,196,t)+','+lp(62,134,t)+','+lp(8,16,t)+')" fill-rule="evenodd" d="'+AD+'"/>',-18+i*2,'a')}
+  mk('<path fill="url(#gA)" fill-rule="evenodd" stroke="rgba(255,255,255,.55)" stroke-width="1.5" d="'+AD+'"/><path fill="rgba(255,255,255,.42)" d="M194 62 L200 62 L126 322 L100 322 Z"/>',18,'a');
+  L.style.transform='rotateY(-20deg) rotateX(10deg)';
+  if(!calm)addEventListener('pointermove',function(e){var dx=(e.clientX/innerWidth-.5),dy=(e.clientY/innerHeight-.5);L.style.transform='rotateY('+(dx*40-10)+'deg) rotateX('+(8-dy*30)+'deg)'});
+  var hd=document.querySelector('header'),bar=document.getElementById('bar'),mn=document.getElementById('menu'),nv=document.getElementById('nav');
+  function sc(){hd.classList.toggle('solid',scrollY>40);var h=document.documentElement.scrollHeight-innerHeight;bar.style.width=(h>0?scrollY/h*100:0)+'%'}
+  addEventListener('scroll',sc,{passive:true});sc();
+  mn.addEventListener('click',function(){var o=nv.classList.toggle('open');mn.setAttribute('aria-expanded',o)});
+  nv.addEventListener('click',function(e){if(e.target.tagName==='A'){nv.classList.remove('open');mn.setAttribute('aria-expanded',false)}});
+  document.getElementById('send').addEventListener('click',function(){var n=document.getElementById('fn').value,m=document.getElementById('fm').value,t=document.getElementById('ft').value;this.href='mailto:hello@arcipex.com?subject='+encodeURIComponent('Message from '+(n||'website'))+'&body='+encodeURIComponent('Name: '+n+'\nEmail: '+m+'\n\n'+t)});
+  // reveal + counters
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;e.target.classList.add('in');e.target.querySelectorAll('[data-n]').forEach(count);io.unobserve(e.target)})},{threshold:.15});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+  function count(el){var n=+el.dataset.n,s=el.dataset.s||'',t0=null;if(calm){el.textContent=n+s;return}
+    (function f(t){t0=t0||t;var k=Math.min((t-t0)/1400,1);el.textContent=Math.round(n*(1-Math.pow(1-k,3)))+s;if(k<1)requestAnimationFrame(f)})(performance.now())}
+})();
+</script>
+</body>
+</html>
